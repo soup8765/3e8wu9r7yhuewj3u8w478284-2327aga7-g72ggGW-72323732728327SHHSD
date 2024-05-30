@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<title>Quiz Template</title>
+</head>
+<body>
+
+  <!-- sidebar -->
+  <div class="sidebar-container" id="sidebarContainer">
+    <div class="flex-group" id="container-functions">
+        <button class="button button-outline" id="shuffle" onclick="shuffleFunction()">Shuffle: OFF</button>
+        <button class="button button-outline" id="stroke-mode" onclick="toggleStrokeMode()">Stroke-Mode: ON</button>
+        <label class="custom-file-upload button button-outline">
+          <input class="sidebar-item" id="fileInput" onchange="loadFile()" type="file" accept=".txt,.md">
+          Custom Upload
+        </label>
+    </div>
+    <div class="flex-group" id="container-files"></div>
+  </div>
+
+  <!-- progress bar -->
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div class="card" id="mainContent">
+    <div id="progress" class="progress" onclick="progressInput()">0/0</div>
+    <!-- learning -->
+    <div class="card-content" id="learn">
+      <div class="card-title" id="question">What is the capital of France?</div>
+      <div class="flex-group" id="grid-container1">
+        <div class="answer button button-outline" id="a1" onclick="input(event)">Option 1</div>
+        <div class="answer button button-outline" id="a2" onclick="input(event)">Option 2</div>
+        <div class="answer button button-outline" id="a3" onclick="input(event)">Option 3</div>
+        <div class="answer button button-outline" id="a4" onclick="input(event)">Option 4</div>
+      </div>
+      <div id="grid-container2">
+        <div id="character"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

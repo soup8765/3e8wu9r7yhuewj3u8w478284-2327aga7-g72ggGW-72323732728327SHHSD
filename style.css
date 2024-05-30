@@ -1,0 +1,284 @@
+:root {
+  --clr-neutral-100: rgb(28, 27, 26);
+  --clr-neutral-200: rgb(16, 15, 15);
+
+  --clr-primary-400: hsl(216, 79%, 60%);
+  --clr-primary-500: hsl(223, 86%, 52%);
+  --clr-primary-600: hsl(241, 49%, 19%);
+
+  --fw-normal: 500;
+  --fw-bold: 700;
+  --fw-extra-bold: 900;
+
+  --fs-300: .875rem;
+  --fs-400: 1rem;
+  --fs-500: 1.75rem;
+  --fs-xl: 2.5rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  background-color: var(--clr-neutral-200);
+  font-size: 1rem;
+  font-family: system-ui;
+  color: darkgrey;
+  font-weight: var(--fw-normal);
+  line-height: 1.6;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 2rem;
+  text-align: center;
+}
+
+/* Ensures consistent font */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+
+.flex-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* selects all child elements within a flex-group container */
+.flex-group > * {
+  flex: 1;
+  min-width: fit-content;
+}
+
+.button {
+  color: inherit;
+  cursor: pointer;
+  line-height: 1.3;
+  text-decoration: none;
+  padding: .75rem;
+  border: 0;
+  border-radius: .5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+}
+
+.button>svg {
+  width: 1.75rem;
+}
+
+/* for answers */
+.button-primary {
+  background-color: var(--clr-primary-400);
+  box-shadow: 0 .325rem 0 var(--clr-primary-500);
+  transition: box-shadow 200ms, translate 200ms;
+}
+
+.button-primary:is(:hover, :focus-visible) {
+  translate: 0 -.25rem;
+  box-shadow: 0 .575rem 0 var(--clr-primary-500);
+}
+
+.button-primary:active {
+  translate: 0 0;
+  box-shadow: 0 0 0 var(--clr-primary-500);
+}
+
+/* button outlines */
+.button-outline {
+  background: transparent;
+  border: 2px solid hsl(218, 0%, 70%);
+}
+
+.button-outline:is(:hover, :focus-visible) {
+  border-color: var(--clr-primary-400);
+  background-color: var(--clr-neutral-200);
+}
+
+
+
+/* card */
+.card {
+  display: grid;
+  gap: clamp(1rem, 5cqi, 2rem);
+  max-width: 720px;
+  min-width: 80vw;
+  min-height: 50vh;
+  padding: clamp(1rem, 5cqi, 3rem);
+  background-color: var(--clr-neutral-100);
+  border-radius: .75rem;
+}
+
+.card>img {
+  border-radius: .5rem;
+}
+
+.card-content {
+  display: grid;
+  gap: 1rem;
+}
+
+.card-title {
+  font-size: 1.325rem;
+  line-height: 1.2;
+}
+
+.card-title:not(:first-child) {
+  margin-block-start: .5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure the card takes full height */
+}
+
+.progress,.question {
+  flex: 1; /* Each takes up one part of the available space */
+}
+
+.answers {
+  flex: 2; /* Answers take up twice as much space as progress/question */
+}
+
+.char {
+
+  margin-inline: 5px;
+
+  background-color: var(--clr-neutral-200);
+
+  border-radius: 0px;
+
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  cursor: pointer;
+}
+
+#progress {
+  max-height: 10vh;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* progress bar */
+#progress-bar-container {
+
+  max-width: 720px;
+  min-width: 80vw;
+
+  height: 20px; /* Adjust as needed */
+
+  background-color: var(--clr-neutral-100); /* dark grey background */
+
+  border-radius: 5px; /* Rounded corners */
+
+}
+
+  
+
+#progress-bar {
+
+  height: 100%;
+
+  width: 0%; /* Start at 0% */
+
+  background-color: rgb(124, 180, 135); /* Green */
+
+  border-radius: 5px; /* Rounded corners */
+
+  transition: width 0.5s; /* Smooth transition */
+
+}
+
+/* changes layout for larger screens */
+
+@media (width > 350px) {
+  .answer {
+      grid-template-columns: fit-content(40%);
+  }
+}
+
+@media (height > 450px) {
+  .card {
+    padding: clamp(1rem, 1cqi, 3rem);
+  }
+}
+
+.swipe-down-animation {
+
+  opacity: 0;
+
+  animation: slideFromAbove 0.2s forwards, fadeIn 0.25s ease-in-out forwards;
+
+}
+
+  
+
+@keyframes slideFromAbove {
+
+  from { margin-top: -200%; }
+
+  to { margin-top: 0%; }
+
+}
+
+  
+
+@keyframes fadeIn {
+
+  0% {
+
+      opacity: 0;
+
+  }
+
+  100% {
+
+      opacity: 1;
+
+  }
+
+}
+
+  
+
+@keyframes shakeScreen {
+
+  0% { margin-left: 0; }
+
+  25% { margin-left: -10px; }
+
+  50% { margin-left: 10px; }
+
+  75% { margin-left: -10px; }
+
+  100% { margin-left: 0; }
+
+}
+
+  
+
+.shake-animation {
+
+  animation: shakeScreen 0.2s;
+
+}
