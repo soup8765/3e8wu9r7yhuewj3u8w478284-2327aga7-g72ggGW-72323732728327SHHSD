@@ -2,6 +2,7 @@
 let counter = 2;
 let shuffle = false;
 let strokeMode = true;
+let normalMode = true;
 let currentProgress = 0;
 let data, backupData;
 let question, A;
@@ -9,7 +10,7 @@ let consecutiveAns = 0;
 let wrong = true;
 let canBeDone = true
 
-const retryAmount = 25;
+let doAmount = 1;
 
 const filePathArray = [
   "flashcards/Book 1.md",
@@ -89,8 +90,13 @@ function toggleSidebar() {
 }
 
 function updateProgressBar(currentProgress) {
+  
   const progressBar = document.getElementById('progress-bar');
-  progressBar.style.width = currentProgress + '%';
+  if (normalMode) {
+    progressBar.style.width = 0 + '%';
+  } else {
+    progressBar.style.width = currentProgress + '%';
+  }
 }
 
 async function findTxtFiles(file) {
@@ -148,6 +154,21 @@ function toggleStrokeMode() {
   parseFile();
 }
 
+function toggleNormalMode() {
+  if (normalMode) {
+    // When turned off
+    document.getElementById("normal").textContent = "Normal-Mode: OFF";
+    doAmount = 25;
+  } else {
+    // When turned on
+    document.getElementById("normal").textContent = "Normal-Mode: ON";
+    doAmount = 1;
+  }
+  normalMode = !normalMode;
+  updateProgressBar(0);
+  parseFile();
+}
+
 function toggleElementsVisibility() {
 
 
@@ -198,7 +219,6 @@ async function sidebarFiles() {
     console.error('Error loading text file:', error);
   }
 }
-
 
 
 
@@ -415,12 +435,12 @@ function displayChar(characterStr) {
         // if current completed char is the last one, it resets
         if (index === characterStr.split("").length - 1) {
           consecutiveAns++;
-          updateProgressBar((consecutiveAns/retryAmount) * 100);
+          updateProgressBar((consecutiveAns/doAmount) * 100);
 
           // checks if consecutiveAns meets amount, then moves on to next one
-          if (consecutiveAns === retryAmount) {
+          if (consecutiveAns === doAmount) {
             consecutiveAns = 0;
-            updateProgressBar((consecutiveAns/retryAmount) * 100);
+            updateProgressBar((consecutiveAns/doAmount) * 100);
             if (counter === data.length - 1) {
               counter = 2;
             } else {
@@ -461,16 +481,16 @@ function input(event) {
   if (event.target.dataset.term == A) {
     // updates progress bar
     consecutiveAns++
-    updateProgressBar((consecutiveAns/retryAmount) * 100);
+    updateProgressBar((consecutiveAns/doAmount) * 100);
 
     // green effect
     event.target.style.cssText = "background-color: rgb(107, 155, 115); opacity: 1; transition: background-color 0.4s, opacity 0.5s;";
     event.target.disabled = true; // Disable the element
 
     // checks if consecutiveAns meets amount, then moves on to next one
-    if (consecutiveAns === retryAmount) {
+    if (consecutiveAns === doAmount) {
         consecutiveAns = 0;
-        updateProgressBar((consecutiveAns/retryAmount) * 100);
+        updateProgressBar((consecutiveAns/doAmount) * 100);
         if (counter === data.length - 1) {
             counter = 2;
         } else {
@@ -490,7 +510,7 @@ function input(event) {
     addAnimation('shake-animation', document.getElementById("mainContent"));
 
     consecutiveAns = 0;
-    updateProgressBar((consecutiveAns/retryAmount) * 100);
+    updateProgressBar((consecutiveAns/doAmount) * 100);
     
     // plays red animation
     event.target.style.cssText = "background-color: rgb(163, 80, 79); opacity: 1; transition: background-color 0.4s, opacity 0.5s;";
