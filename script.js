@@ -342,30 +342,26 @@ function displayChar(characterStr) {
 
   if (characterStr) {
 
-    console.log(characterStr, characterStr.split(""));
+  console.log(characterStr, characterStr.split(""));
 
   // var
   const grid2 = document.getElementById('grid-container2');
   let charArr = [];
   const amountOfChar = characterStr.split("").length;
 
-  let mainContentElement = document.getElementById("mainContent");
-  let mainContentElementHeight = mainContentElement.clientHeight;
-  let stuffInMaincontent = document.getElementById("learn");
-  let stuffInMaincontentHeight = stuffInMaincontent.clientHeight;
-
-  var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0];
-  var x=w.innerWidth||e.clientWidth||g.clientWidth;
-  var y=w.innerHeight||e.clientHeight||g.clientHeight;
-  const size = {width:x, height:y}
-  console.log(size.width+" "+size.height);
-
-  let sizeOfBox;
-  if (size.width < 500) {
-    sizeOfBox = (mainContentElementHeight)
-  } else {
-    sizeOfBox = (mainContentElementHeight-stuffInMaincontentHeight)
+  // Get the first.char element to determine its width
+  const cardElement = document.querySelector('.card');
+  if (!cardElement) {
+    console.error('No.card element found.');
+    return; // Exit the function early if no.char element is found
   }
+
+  const style = window.getComputedStyle(cardElement);
+  const paddingLeft = parseInt(style.paddingLeft);
+  const paddingRight = parseInt(style.paddingRight);
+
+  // Use 30% the width of the.char element for sizeOfBox
+  const sizeOfBox = (cardElement.clientWidth - (paddingLeft + paddingRight));
 
   // creates box + quiz for each char
   characterStr.split("").forEach((element, index) => {
