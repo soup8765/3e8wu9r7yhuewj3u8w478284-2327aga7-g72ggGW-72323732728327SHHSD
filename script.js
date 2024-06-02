@@ -17,7 +17,8 @@ const filePathArray = [
   "flashcards/Holidays + Seasons.md",
   "flashcards/HSK 1.md",
   "flashcards/Words + Definitions.md",
-  "flashcards/words and phrases Chinese.md"
+  "flashcards/words and phrases Chinese.md",
+  "flashcards/Computing.md"
 ]
 
 // Shuffle algorithm
