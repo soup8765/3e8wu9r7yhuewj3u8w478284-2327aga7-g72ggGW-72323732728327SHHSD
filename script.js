@@ -220,6 +220,17 @@ async function sidebarFiles() {
   }
 }
 
+document.addEventListener("keydown", function(event) {
+  // Prevent the default action of the key press
+  event.preventDefault();
+
+  // Check if the pressed key is a number between 1 and 4
+  if (event.key >= "1" && event.key <= "4") {
+    // Simulate clicking the button corresponding to the pressed number
+    document.getElementById("a" + event.key).click();
+  }
+});
+
 
 
 // Gets file, then parses
