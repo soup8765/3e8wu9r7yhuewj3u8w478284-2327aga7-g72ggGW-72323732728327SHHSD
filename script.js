@@ -369,11 +369,15 @@ function displayChar(characterStr) {
   }
 
   const style = window.getComputedStyle(cardElement);
-  const paddingLeft = parseInt(style.paddingLeft);
-  const paddingRight = parseInt(style.paddingRight);
 
-  // Use 30% the width of the.char element for sizeOfBox
-  const sizeOfBox = (cardElement.clientWidth - (paddingLeft + paddingRight));
+  let sizeOfBox = 0;
+  if (cardElement.clientWidth < 500) {
+    //phone
+    sizeOfBox = (cardElement.clientWidth - (parseInt(style.paddingLeft) + parseInt(style.paddingRight)));
+  } else {
+    //ipad
+    sizeOfBox = (cardElement.clientWidth/3.85);
+  }
 
   // creates box + quiz for each char
   characterStr.split("").forEach((element, index) => {
