@@ -1,5 +1,5 @@
 ```
-question|term|term
+term|term|term
 char|pin|eng
 会|huì|can/will/to meet
 菜|cài|cuisine/dish/vegetables
