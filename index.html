@@ -1,275 +1,47 @@
-:root {
-  --clr-neutral-100: rgb(28, 27, 26);
-  --clr-neutral-200: rgb(16, 15, 15);
-
-  --clr-primary-400: hsl(216, 79%, 60%);
-  --clr-primary-500: hsl(223, 86%, 52%);
-  --clr-primary-600: hsl(241, 49%, 19%);
-
-  --fw-normal: 500;
-  --fw-bold: 700;
-  --fw-extra-bold: 900;
-
-  --fs-300: .875rem;
-  --fs-400: 1rem;
-  --fs-500: 1.75rem;
-  --fs-xl: 2.5rem;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  background-color: var(--clr-neutral-200);
-  font-size: 1.25rem;
-  font-family: system-ui;
-  color: darkgrey;
-  font-weight: var(--fw-normal);
-  line-height: 1.6;
-  display: grid;
-  justify-items: center;
-  min-height: 99.8vh;
-  width: 99.88vw;
-  text-align: center;
-}
-
-/* Ensures consistent font */
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-
-.flex-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-/* selects all child elements within a flex-group container */
-.flex-group > * {
-  flex: 1;
-  min-width: fit-content;
-}
-
-.button {
-  color: inherit;
-  cursor: pointer;
-  line-height: 1.3;
-  text-decoration: none;
-  padding: .75rem;
-  border: 0;
-  border-radius: .5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .25rem;
-}
-
-/* for answers */
-.button-primary {
-  background-color: var(--clr-primary-400);
-  box-shadow: 0 .325rem 0 var(--clr-primary-500);
-  transition: box-shadow 200ms, translate 200ms;
-}
-
-.button-primary:is(:hover, :focus-visible) {
-  translate: 0 -.25rem;
-  box-shadow: 0 .575rem 0 var(--clr-primary-500);
-}
-
-.button-primary:active {
-  translate: 0 0;
-  box-shadow: 0 0 0 var(--clr-primary-500);
-}
-
-/* button outlines */
-.button-outline {
-  background: transparent;
-  border: 2px solid hsl(218, 0%, 70%);
-}
-
-.button-outline:is(:hover, :focus-visible) {
-  border-color: var(--clr-primary-400);
-  background-color: var(--clr-neutral-200);
-}
-
-
-
-/* card */
-.card {
-  display: grid;
-  gap: clamp(1rem, 5cqi, 2rem);
-  width: 90vw;
-  min-height: 50vh;
-  padding: clamp(1rem, 5cqi, 3rem);
-  background-color: var(--clr-neutral-100);
-  border-radius: .75rem;
-}
-
-.card>img {
-  border-radius: .5rem;
-}
-
-.card-content {
-  display: grid;
-  gap: 1rem;
-}
-
-.card-question {
-  font-size: 1.325rem;
-  line-height: 1.2;
-}
-
-.card-question:not(:first-child) {
-  margin-block-start: .5rem;
-}
-
-.progress,.card-question {
-  flex: 1; /* Each takes up one part of the available space */
-}
-
-.answers {
-  flex: 2; /* Answers take up twice as much space as progress/question */
-}
-
-.char {
-
-  background-color: var(--clr-neutral-200);
-
-  border-radius: 0px;
-
-}
-
-input[type="file"] {
-  display: none;
-}
-
-.custom-file-upload {
-  cursor: pointer;
-}
-
-#progress {
-  height: 10vh;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-/* progress bar */
-#progress-bar-container {
-
-  width: 80vw;
-
-  height: 20px; /* Adjust as needed */
-
-  background-color: var(--clr-neutral-100); /* dark grey background */
-
-  border-radius: 5px; /* Rounded corners */
-
-  margin: 5vh;
-}
-
-  
-
-#progress-bar {
-
-  height: 100%;
-
-  width: 0%; /* Start at 0% */
-
-  background-color: rgb(124, 180, 135); /* Green */
-
-  border-radius: 5px; /* Rounded corners */
-
-  transition: width 0.5s; /* Smooth transition */
-
-}
-
-
-#grid-container2 {
-  min-height: 0vh; /* Set a fixed height */
-  grid-auto-rows: auto; /* Allows rows to expand based on content */
-  overflow-y: auto; /* Enables scrolling within the grid container if content overflows vertically */
-}
-
-
-
-.swipe-down-animation {
-
-  opacity: 0;
-
-  animation: slideFromAbove 0.2s forwards, fadeIn 0.25s ease-in-out forwards;
-
-}
-
-  
-
-@keyframes slideFromAbove {
-
-  from { margin-top: -200%; }
-
-  to { margin-top: 0%; }
-
-}
-
-  
-
-@keyframes fadeIn {
-
-  0% {
-
-      opacity: 0;
-
-  }
-
-  100% {
-
-      opacity: 1;
-
-  }
-
-}
-
-  
-
-@keyframes shakeScreen {
-
-  0% { margin-left: 0; }
-
-  25% { margin-left: -10px; }
-
-  50% { margin-left: 10px; }
-
-  75% { margin-left: -10px; }
-
-  100% { margin-left: 0; }
-
-}
-
-  
-
-.shake-animation {
-
-  animation: shakeScreen 0.2s;
-
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<title>Quiz Template</title>
+</head>
+<body>
+
+  <!-- sidebar -->
+  <div class="sidebar-container" id="sidebarContainer">
+    <div class="flex-group" id="container-functions">
+        <button class="button button-outline" id="shuffle" onclick="shuffleFunction()">Shuffle: OFF</button>
+        <button class="button button-outline" id="stroke-mode" onclick="toggleStrokeMode()">Stroke-Mode: ON</button>
+        <button class="button button-outline" id="normal" onclick="toggleNormalMode()">Normal-Mode: ON</button>
+    </div>
+    <div class="flex-group" id="container-files"></div>
+  </div>
+
+  <!-- progress bar -->
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div class="card" id="mainContent">
+    <!-- learning -->
+    <div class="card-content" id="learn">
+      <div id="progress" class="progress" onclick="progressInput()">0/0</div>
+      <div class="card-question" id="question">What is the capital of France?</div>
+      <div class="flex-group" id="grid-container1">
+        <div class="answer button button-outline" id="a1" value="1" onclick="input(event)">Option 1</div>
+        <div class="answer button button-outline" id="a2" value="2" onclick="input(event)">Option 2</div>
+        <div class="answer button button-outline" id="a3" value="3" onclick="input(event)">Option 3</div>
+        <div class="answer button button-outline" id="a4" value="4" onclick="input(event)">Option 4</div>
+      </div>
+      <div id="grid-container2">
+        <div id="character"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
