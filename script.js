@@ -17,8 +17,7 @@ const filePathArray = [
   "flashcards/Holidays + Seasons.md",
   "flashcards/HSK 1.md",
   "flashcards/Words + Definitions.md",
-  "flashcards/words and phrases Chinese.md",
-  "flashcards/Computing.md"
+  "flashcards/words and phrases Chinese.md"
 ]
 
 // Shuffle algorithm
@@ -259,16 +258,13 @@ allIndices.forEach((index) => {
     }
 });
 
-// If indexQ is empty, populate it with a random index that is not in indexTerms
+// If indexQ is empty, takes random index from indexTerms, removing it from indexTerms 
 if (indexQ.length === 0) {
-    // If there are available indices in indexTerms, select one at random
-    if (indexTerms.length > 0) {
-        const randomIndex = indexTerms[Math.floor(Math.random() * indexTerms.length)];
-        indexQ.push(randomIndex);
+  const randomIndex = indexTerms[Math.floor(Math.random() * indexTerms.length)];
+  indexQ.push(randomIndex);
 
-        // Remove the selected index from indexTerms
-        indexTerms = indexTerms.filter(index => index !== randomIndex);
-    }
+  // Remove the selected index from indexTerms
+  indexTerms = indexTerms.filter(index => index !== randomIndex);
 }
 
   // Array for answers
@@ -305,6 +301,12 @@ if (indexQ.length === 0) {
 // Displays content
 function display(answerArray) {
 
+  // removes all previous SVG boxes created
+  const parent = document.getElementById("grid-container2");
+  while (parent.firstChild) {
+    parent.firstChild.remove();
+  }
+
   // hides char mode
   document.querySelectorAll(".char").forEach(element => element.style.display = "none")
   document.querySelectorAll(".answer").forEach(element => element.removeAttribute('style'));
@@ -318,13 +320,17 @@ function display(answerArray) {
     let toBeWrit;
     const REGEX_CHINESE = /[\u4e00-\u9fff]|[\u3400-\u4dbf]|[\u{20000}-\u{2a6df}]|[\u{2a700}-\u{2b73f}]|[\u{2b740}-\u{2b81f}]|[\u{2b820}-\u{2ceaf}]|[\u{f900}-\u{faff}]|[\u{3300}-\u{33ff}]|[\u{fe30}-\u{fe4f}]|[\u{f900}-\u{faff}]|[\u{2f800}-\u{2fa1f}]/u;
     if (REGEX_CHINESE.test(question)) {
-      canBeDone = true;
-      toBeWrit = question;
-      displayChar(toBeWrit);
+      if (randomNum(0, 1) === 0) {
+        canBeDone = true;
+        toBeWrit = question;
+        displayChar(toBeWrit);
+      }
     } else if (REGEX_CHINESE.test(A)) {
-      canBeDone = true;
-      toBeWrit = A;
-      displayChar(toBeWrit);
+      if (randomNum(0, 1) === 0) {
+        canBeDone = true;
+        toBeWrit = A;
+        displayChar(toBeWrit);
+      }
     } else {
       canBeDone = false;
       displayChar(canBeDone);
@@ -334,12 +340,6 @@ function display(answerArray) {
 }
 
 function displayChar(characterStr) {
-
-  // removes all previous SVG boxes created
-  const parent = document.getElementById("grid-container2");
-  while (parent.firstChild) {
-    parent.firstChild.remove();
-  }
 
   if (characterStr) {
 
