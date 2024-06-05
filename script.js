@@ -306,6 +306,7 @@ if (indexQ.length === 0) {
 
   question = termsByCounter[indexQ[randomNum(0, indexQ.length)]];
 
+  console.log(arrayOfA);
   display(arrayOfA);
 }
 
