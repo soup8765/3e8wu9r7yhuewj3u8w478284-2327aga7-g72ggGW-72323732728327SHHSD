@@ -1,13 +1,13 @@
 :root {
-  --bg-light: rgb(30, 30, 46)
-  --bg-dark: rgb(24, 24, 37)
+  --bg-light: rgb(30, 30, 46);
+  --bg-dark: rgb(24, 24, 37);
 
   /* Hover over button */
   --clr-primary-400: hsl(216, 79%, 60%);
   --clr-primary-500: hsl(223, 86%, 52%);
   --clr-primary-600: hsl(241, 49%, 19%);
 
-  --green: rgb(148, 226, 213)
+  --green: rgb(148, 226, 213);
 
   --fw-normal: 500;
   --fw-bold: 700;
