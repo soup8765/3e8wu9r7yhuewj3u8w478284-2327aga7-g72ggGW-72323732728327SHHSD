@@ -15,7 +15,7 @@ let doAmount = 1;
 const filePathArray = [
   "flashcards/Book 1.md",
   "flashcards/Holidays + Seasons.md",
-  "flashcards/HSK 1.md",
+  "flashcards/MALAY.md",
   "flashcards/Words + Definitions.md",
   "flashcards/words and phrases Chinese.md"
 ]
@@ -270,6 +270,8 @@ allIndices.forEach((index) => {
     }
 });
 
+console.log(indexQ, indexTerms)
+
 // If indexQ is empty, takes random index from indexTerms, removing it from indexTerms 
 if (indexQ.length === 0) {
   const randomIndex = indexTerms[Math.floor(Math.random() * indexTerms.length)];
@@ -278,6 +280,8 @@ if (indexQ.length === 0) {
   // Remove the selected index from indexTerms
   indexTerms = indexTerms.filter(index => index !== randomIndex);
 }
+
+console.log(indexQ, indexTerms)
 
   // Array for answers
   let arrayOfA = [];
@@ -296,6 +300,7 @@ if (indexQ.length === 0) {
     const potentialT = contents[potentialIndexs].split("|")[indexForPotentialA[randomNum(0, indexForPotentialA.length)]];
     if (!termsByCounter.includes(potentialT) && !arrayOfA.includes(potentialT)) {
       arrayOfA.push(potentialT);
+      console.log(potentialIndexs, contents[potentialIndexs].split("|"))
     }
   }
   // Adds answer to answer array
