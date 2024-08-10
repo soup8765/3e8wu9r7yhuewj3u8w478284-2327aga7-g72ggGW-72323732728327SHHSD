@@ -100,6 +100,7 @@ function updateProgressBar(currentProgress) {
 }
 
 async function findTxtFiles(file) {
+  console.log(file)
   try {
     const response = await fetch('flashcards/HSK 1.md');
     if (file) {
@@ -108,11 +109,10 @@ async function findTxtFiles(file) {
       data = await response.text();
     }
 
-    if (data.includes("```\n") && data.includes("\n```")) {
+data = data.replace(/^```[\n\r]*/, "");  // Remove leading ``` and newlines
+data = data.replace(/[\n\r]*```$/, "");  // Remove trailing ``` and newlines
 
-      data = data.replace('```\n', "");
-      data = data.replace('\n```', "");
-    }
+    
     console.log(data)
     data = data.split("\n").map(element => element.replace("\r", ""));
     backupData = data.slice();
@@ -124,7 +124,7 @@ async function findTxtFiles(file) {
   }
 }
 
-findTxtFiles();
+
 sidebarFiles();
 
 function shuffleFunction() {
@@ -246,6 +246,7 @@ async function loadFile(filepath) {
 function parseFile() {
   
   const contents = data;
+  console.log("aaaa", contents)
   // Gets the indexes of both question and term in txt file
   let details = contents[0].split("|");
 // Collect all indices for "question" and "term" elements
