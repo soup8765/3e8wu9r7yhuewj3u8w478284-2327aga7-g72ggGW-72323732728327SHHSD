@@ -497,7 +497,12 @@ function input(event) {
     updateProgressBar((consecutiveAns/doAmount) * 100);
 
     // green effect
-    event.target.style.cssText = "background-color: rgb(107, 155, 115); opacity: 1; transition: background-color 0.4s, opacity 0.5s;";
+    const greenColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--green')
+      .trim();
+
+    // Apply the custom property to the target element
+    event.target.style.cssText = `background-color: ${greenColor}; opacity: 1; transition: background-color 0.4s, opacity 0.5s;`;
     event.target.disabled = true; // Disable the element
 
     // checks if consecutiveAns meets amount, then moves on to next one
