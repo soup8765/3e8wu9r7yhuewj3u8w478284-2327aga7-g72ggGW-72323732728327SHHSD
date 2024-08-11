@@ -1,7 +1,6 @@
 // Global variables
 let counter = 2;
 let shuffle = false;
-let strokeMode = true;
 let normalMode = true;
 let currentProgress = 0;
 let data, backupData;
@@ -142,18 +141,6 @@ function shuffleFunction() {
   parseFile();
 }
 
-function toggleStrokeMode() {
-  if (strokeMode) {
-    // When turned off
-    document.getElementById("stroke-mode").textContent = "Stroke-Mode: OFF";
-  } else {
-    // When turned on
-    document.getElementById("stroke-mode").textContent = "Stroke-Mode: ON";
-  }
-  strokeMode = !strokeMode;
-  parseFile();
-}
-
 function toggleNormalMode() {
   if (normalMode) {
     // When turned off
@@ -168,23 +155,6 @@ function toggleNormalMode() {
   updateProgressBar(0);
   parseFile();
 }
-
-function toggleElementsVisibility() {
-
-
-  const isStrokeModeVisible = Math.random() < 0.5;
-   
-   
-  if (isStrokeModeVisible) {
-
-     document.querySelectorAll(".char").forEach(element => element.removeAttribute("style"))
-     document.querySelectorAll(".answer").forEach(element => element.style.display = "none");
-  } else {
-
-     document.querySelectorAll(".char").forEach(element => element.style.display = "none")
-     document.querySelectorAll(".answer").forEach(element => element.removeAttribute('style'));
-  }
- }
  
 
 function progressInput() {
@@ -334,158 +304,9 @@ function display(answerArray) {
     document.getElementById(`a${i + 1}`).textContent = answerArray[i];
   }
   document.getElementById("question").textContent = question;
-  if (strokeMode) {
-    let toBeWrit;
-    const REGEX_CHINESE = /[\u4e00-\u9fff]|[\u3400-\u4dbf]|[\u{20000}-\u{2a6df}]|[\u{2a700}-\u{2b73f}]|[\u{2b740}-\u{2b81f}]|[\u{2b820}-\u{2ceaf}]|[\u{f900}-\u{faff}]|[\u{3300}-\u{33ff}]|[\u{fe30}-\u{fe4f}]|[\u{f900}-\u{faff}]|[\u{2f800}-\u{2fa1f}]/u;
-    if (REGEX_CHINESE.test(question)) {
-      if (randomNum(0, 1) === 0) {
-        canBeDone = true;
-        toBeWrit = question;
-        displayChar(toBeWrit);
-      }
-    } else if (REGEX_CHINESE.test(A)) {
-      if (randomNum(0, 1) === 0) {
-        canBeDone = true;
-        toBeWrit = A;
-        displayChar(toBeWrit);
-      }
-    } else {
-      canBeDone = false;
-      displayChar(canBeDone);
-    }
-  }
 
 }
 
-function displayChar(characterStr) {
-
-  if (characterStr) {
-
-  console.log(characterStr, characterStr.split(""));
-
-  // var
-  const grid2 = document.getElementById('grid-container2');
-  let charArr = [];
-  const amountOfChar = characterStr.split("").length;
-
-  // Get the first.char element to determine its width
-  const cardElement = document.querySelector('.card');
-  if (!cardElement) {
-    console.error('No.card element found.');
-    return; // Exit the function early if no.char element is found
-  }
-
-  const style = window.getComputedStyle(cardElement);
-
-  let sizeOfBox = 0;
-  if (cardElement.clientWidth < 500) {
-    //phone
-    sizeOfBox = (cardElement.clientWidth - (parseInt(style.paddingLeft) + parseInt(style.paddingRight)));
-  } else {
-    //ipad
-    sizeOfBox = (cardElement.clientWidth/3.85);
-  }
-
-  // creates box + quiz for each char
-  characterStr.split("").forEach((element, index) => {
-
-  // Define the SVG namespace
-  const svgNS = "http://www.w3.org/2000/svg";
-
-  // Create the SVG element
-  const svg = document.createElementNS(svgNS, "svg");
-  svg.setAttributeNS(null, "width", sizeOfBox);
-  svg.setAttributeNS(null, "height", sizeOfBox);
-  svg.setAttributeNS(null, "id", "grid-background-target");
-
-  // Create and append the line elements
-  const lines = [
-    { x1: 0, y1: 0, x2: sizeOfBox, y2: sizeOfBox },
-    { x1: sizeOfBox, y1: 0, x2: 0, y2: sizeOfBox },
-    { x1: sizeOfBox / 2, y1: 0, x2: sizeOfBox / 2, y2: sizeOfBox },
-    { x1: 0, y1: sizeOfBox / 2, x2: sizeOfBox, y2: sizeOfBox / 2 }
-  ];
-
-  // SVG dashed box
-  lines.forEach(function (line) {
-    const lineElement = document.createElementNS(svgNS, "line");
-    lineElement.setAttributeNS(null, "x1", line.x1);
-    lineElement.setAttributeNS(null, "y1", line.y1);
-    lineElement.setAttributeNS(null, "x2", line.x2);
-    lineElement.setAttributeNS(null, "y2", line.y2);
-    lineElement.setAttributeNS(null, "stroke", "#DDD");
-    lineElement.setAttributeNS(null, "opacity", "0.15");
-    lineElement.setAttributeNS(null, "stroke-dasharray", "4,10");
-    svg.appendChild(lineElement);
-  });
-
-  // sets id and class, referenced
-  svg.setAttribute("id", "character" + index);
-  svg.setAttribute("class", "char");
-
-  // apphends to grid2
-  grid2.style.gridTemplateColumns = `repeat(${grid2.childElementCount}, 1fr)`;
-  grid2.appendChild(svg);
-
-  // loads character quiz in SVG box
-  HanziWriter.loadCharacterData(element, options = {});
-  charArr.push(HanziWriter.create(svg, element, {
-    width: sizeOfBox,
-    height: sizeOfBox,
-    showHintAfterMisses: 1,
-    highlightCompleteColor: 'rgb(107, 155, 115)',
-    /*radicalColor: '#337ab7', // blue */
-    strokeColor: 'rgb(204, 204, 204)', // light grey
-    showCharacter: false,
-    showOutline: false,
-    drawingWidth: 20
-  }));
-    grid2.style.gridTemplateColumns = `repeat(${grid2.childElementCount}, 1fr)`;
-  });
-
-  charArr.forEach((char, index) => {
-    char.quiz({
-
-      onMistake: function() {
-        addAnimation('shake-animation', document.getElementById("mainContent"));
-      },
-
-      onComplete: function () {
-        // if current completed char is the last one, it resets
-        if (index === characterStr.split("").length - 1) {
-          consecutiveAns++;
-          updateProgressBar((consecutiveAns/doAmount) * 100);
-
-          // checks if consecutiveAns meets amount, then moves on to next one
-          if (consecutiveAns === doAmount) {
-            consecutiveAns = 0;
-            updateProgressBar((consecutiveAns/doAmount) * 100);
-            if (counter === data.length - 1) {
-              counter = 2;
-            } else {
-              counter++;
-            }
-          }
-
-          setTimeout(() => {
-            addAnimation('swipe-down-animation', document.getElementById("mainContent"));
-            parseFile();
-          }, 1000);
-        }
-
-      }
-    });
-  });
-
-  document.querySelectorAll(".char").forEach(element => {
-    element.style.display = "none";
-  });
-
-  // 50/50
-  toggleElementsVisibility();
-  }
-
-}
 
 // On click, check and colour
 function input(event) {

@@ -1,5 +1,5 @@
 ```
-question|term|term
+term|term|term
 char|pin|eng
 春天|chūn tiān|Spring
 夏天|xià tiān|Summer
